@@ -1,0 +1,1 @@
+Учебный проект Clone Telegram написан на Kotlin с использованием Firebase и паттерна MVVM
