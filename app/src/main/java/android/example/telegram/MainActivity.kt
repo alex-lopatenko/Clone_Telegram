@@ -1,6 +1,8 @@
 package android.example.telegram
 
 import android.example.telegram.databinding.ActivityMainBinding
+import android.example.telegram.ui.ChatsFragment
+import android.example.telegram.ui.SettingsFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -36,6 +38,8 @@ class MainActivity : AppCompatActivity() {
 
     private fun initFunc() {
         setSupportActionBar(mToolbar)
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.dataContainer, ChatsFragment()).commit()
         createHeader()
         createDrawer()
     }
@@ -96,7 +100,11 @@ class MainActivity : AppCompatActivity() {
                                 .withIcon(R.drawable.ic_menu_help)
                 ).withOnDrawerItemClickListener(object :Drawer.OnDrawerItemClickListener{
                     override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
-                        Toast.makeText(applicationContext, position.toString(), Toast.LENGTH_SHORT).show()
+                        when (position) {
+                            7 -> supportFragmentManager.beginTransaction()
+                                .addToBackStack(null)
+                                .replace(R.id.dataContainer, SettingsFragment()).commit()
+                        }
                         return false
                     }
 
