@@ -1,5 +1,7 @@
 package android.example.telegram
 
+import android.content.Intent
+import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.databinding.ActivityMainBinding
 import android.example.telegram.ui.fragments.ChatsFragment
 import android.example.telegram.ui.objects.AppDrawer
@@ -26,11 +28,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        setSupportActionBar(mToolbar)
-        mAppDrawer.create()
-        supportFragmentManager.beginTransaction()
-            .replace(R.id.dataContainer, ChatsFragment()).commit()
-
+        if (false) {
+            setSupportActionBar(mToolbar)
+            mAppDrawer.create()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.dataContainer, ChatsFragment()).commit()
+        } else {
+            val intent = Intent(this, RegisterActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 
