@@ -2,6 +2,7 @@ package android.example.telegram.ui.objects
 
 import android.example.telegram.R
 import android.example.telegram.ui.fragments.SettingsFragment
+import android.example.telegram.utilits.replaceFragment
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
@@ -80,9 +81,7 @@ class AppDrawer (val mainActivity:AppCompatActivity, val toolbar: Toolbar) {
                 ).withOnDrawerItemClickListener(object :Drawer.OnDrawerItemClickListener{
                     override fun onItemClick(view: View?, position: Int, drawerItem: IDrawerItem<*>): Boolean {
                         when (position) {
-                            7 -> mainActivity.supportFragmentManager.beginTransaction()
-                                    .addToBackStack(null)
-                                    .replace(R.id.dataContainer, SettingsFragment()).commit()
+                            7 -> mainActivity.replaceFragment(SettingsFragment())
                         }
                         return false
                     }

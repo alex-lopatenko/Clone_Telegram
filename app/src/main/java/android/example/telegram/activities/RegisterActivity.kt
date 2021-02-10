@@ -3,6 +3,7 @@ package android.example.telegram.activities
 import android.example.telegram.R
 import android.example.telegram.databinding.ActivityRegisterBinding
 import android.example.telegram.ui.fragments.EnterPhoneNumberFragment
+import android.example.telegram.utilits.replaceFragment
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
@@ -23,8 +24,6 @@ class RegisterActivity : AppCompatActivity() {
         mToolbar = mBinding.registerToolbar
         setSupportActionBar(mToolbar)
         title = getString(R.string.register_title_your_phone)
-        supportFragmentManager.beginTransaction()
-            .add(R.id.registerDataContainer, EnterPhoneNumberFragment())
-            .commit()
+        replaceFragment(EnterPhoneNumberFragment())
     }
 }

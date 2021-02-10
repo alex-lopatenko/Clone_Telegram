@@ -5,6 +5,8 @@ import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.databinding.ActivityMainBinding
 import android.example.telegram.ui.fragments.ChatsFragment
 import android.example.telegram.ui.objects.AppDrawer
+import android.example.telegram.utilits.replaceActivity
+import android.example.telegram.utilits.replaceFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
@@ -28,14 +30,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        if (false) {
+        if (true) {
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.dataContainer, ChatsFragment()).commit()
+            replaceFragment(ChatsFragment())
         } else {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+            replaceActivity(RegisterActivity())
         }
     }
 
