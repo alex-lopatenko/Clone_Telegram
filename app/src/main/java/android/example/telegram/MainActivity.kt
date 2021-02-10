@@ -5,11 +5,13 @@ import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.databinding.ActivityMainBinding
 import android.example.telegram.ui.fragments.ChatsFragment
 import android.example.telegram.ui.objects.AppDrawer
+import android.example.telegram.utilits.AUTH
 import android.example.telegram.utilits.replaceActivity
 import android.example.telegram.utilits.replaceFragment
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.Toolbar
+import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
 
@@ -30,10 +32,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initFunc() {
-        if (true) {
+        if (AUTH.currentUser!=null) {
             setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatsFragment())
+            replaceFragment(ChatsFragment(), false)
         } else {
             replaceActivity(RegisterActivity())
         }
@@ -44,5 +46,6 @@ class MainActivity : AppCompatActivity() {
     private fun initFields() {
         mToolbar = mBinding.mainToolbar
         mAppDrawer = AppDrawer(this, mToolbar)
+        AUTH = FirebaseAuth.getInstance()
     }
 }
