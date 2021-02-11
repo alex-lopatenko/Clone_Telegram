@@ -5,6 +5,7 @@ import android.example.telegram.R
 import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.utilits.AUTH
 import android.example.telegram.utilits.replaceActivity
+import android.example.telegram.utilits.replaceFragment
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -27,6 +28,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
                 AUTH.signOut()
                 (activity as MainActivity).replaceActivity(RegisterActivity())
             }
+            R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
         return true
     }
