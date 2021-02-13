@@ -4,6 +4,7 @@ import android.example.telegram.MainActivity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.example.telegram.R
+import android.example.telegram.utilits.APP_ACTIVITY
 import android.view.*
 
 
@@ -17,6 +18,7 @@ open class BaseChangeFragment (layout:Int): Fragment(layout) {
 
     override fun onStop() {
         super.onStop()
+        APP_ACTIVITY.hideKeyboard()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

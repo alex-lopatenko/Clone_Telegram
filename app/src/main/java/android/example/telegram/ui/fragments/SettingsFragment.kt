@@ -1,15 +1,15 @@
 package android.example.telegram.ui.fragments
 
-import android.example.telegram.MainActivity
+import android.app.Activity.RESULT_OK
+import android.content.Intent
 import android.example.telegram.R
 import android.example.telegram.activities.RegisterActivity
-import android.example.telegram.utilits.AUTH
-import android.example.telegram.utilits.USER
-import android.example.telegram.utilits.replaceActivity
-import android.example.telegram.utilits.replaceFragment
+import android.example.telegram.utilits.*
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
 import kotlinx.android.synthetic.main.fragment_settings.*
 
 
@@ -29,7 +29,18 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_username.text = USER.username
         settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         settings_btn_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
+        settings_change_photo.setOnClickListener { changePhotoUser() }
     }
+
+    private fun changePhotoUser() {
+        CropImage.activity()
+            .setAspectRatio(1, 1)
+            .setRequestedSize(600, 600)
+            .setCropShape(CropImageView.CropShape.OVAL)
+            .start(APP_ACTIVITY)
+    }
+
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         activity?.menuInflater?.inflate(R.menu.settings_action_menu, menu)
@@ -39,7 +50,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         when(item.itemId) {
             R.id.settings_menu_exit -> {
                 AUTH.signOut()
-                (activity as MainActivity).replaceActivity(RegisterActivity())
+                APP_ACTIVITY.replaceActivity(RegisterActivity())
             }
             R.id.settings_menu_change_name -> replaceFragment(ChangeNameFragment())
         }
