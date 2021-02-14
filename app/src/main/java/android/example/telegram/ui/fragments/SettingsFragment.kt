@@ -5,9 +5,11 @@ import android.content.Intent
 import android.example.telegram.R
 import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.utilits.*
+import android.net.Uri
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import com.google.firebase.storage.StorageReference
 import com.squareup.picasso.Picasso
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
@@ -31,6 +33,7 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
         settings_btn_change_username.setOnClickListener { replaceFragment(ChangeUsernameFragment()) }
         settings_btn_change_bio.setOnClickListener { replaceFragment(ChangeBioFragment()) }
         settings_change_photo.setOnClickListener { changePhotoUser() }
+        settings_user_photo.downloadAndSettImage(USER.photoUrl)
     }
 
     private fun changePhotoUser() {
@@ -66,24 +69,18 @@ class SettingsFragment : BaseFragment(R.layout.fragment_settings) {
             val uri = CropImage.getActivityResult(data).uri
             val path = REF_STORAGE_ROOT.child(FOLDER_PROFILE_IMAGE)
                 .child(CURRENT_UID)
-            path.putFile(uri).addOnCompleteListener { task1 ->
-                if (task1.isSuccessful) {
-                    path.downloadUrl.addOnCompleteListener { task2 ->
-                        if (task2.isSuccessful) {
-                            val photoUrl = task2.result.toString()
-                            REF_DATABASE_ROOT.child(NODE_USERS).child(CURRENT_UID)
-                                .child(CHILD_PHOTO_URL).setValue(photoUrl)
-                                .addOnCompleteListener {
-                                    if (it.isSuccessful) {
-                                        settings_user_photo.downloadAndSettImage(photoUrl)
-                                        showToast(getString(R.string.toast_data_update))
-                                        USER.photoUrl = photoUrl
-                                    }
-                                }
-                        }
+
+            putImageToStorage(uri, path) {
+                getUrlFromStorage(path) {
+                    putUrlToDatabase(it) {
+                        settings_user_photo.downloadAndSettImage(it)
+                        showToast(getString(R.string.toast_data_update))
+                        USER.photoUrl = it
                     }
                 }
             }
         }
     }
+
+
 }
