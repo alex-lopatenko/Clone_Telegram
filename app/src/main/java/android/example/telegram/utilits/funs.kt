@@ -6,6 +6,7 @@ import android.example.telegram.R
 import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.ui.fragments.ChatsFragment
 import android.view.inputmethod.InputMethodManager
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat.getSystemService
@@ -57,9 +58,10 @@ fun hideKeyboard() {
     imm.hideSoftInputFromWindow(APP_ACTIVITY.window.decorView.windowToken, 0)
 }
 
-fun CircleImageView.downloadAndSettImage(url:String) {
+fun ImageView.downloadAndSettImage(url:String) {
     Picasso.get()
         .load(url)
+        .fit()
         .placeholder(R.drawable.default_photo)
         .into(this)
 }
