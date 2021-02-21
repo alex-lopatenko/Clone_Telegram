@@ -15,6 +15,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import com.theartofdev.edmodo.cropper.CropImage
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
 
@@ -29,17 +33,16 @@ class MainActivity : AppCompatActivity() {
         APP_ACTIVITY = this
         initFirebase()
         initUser {
-            initContacts()
+            CoroutineScope(Dispatchers.IO).launch {
+                initContacts()
+            }
+
             initFields()
             initFunc()
         }
     }
 
-    private fun initContacts() {
-        if (checkPermissions(READ_CONTACTS)) {
-            showToast("Чтение контактов")
-        }
-    }
+
 
     private fun initFunc() {
         if (AUTH.currentUser != null) {
