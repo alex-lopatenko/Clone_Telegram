@@ -5,7 +5,9 @@
     <color name="colorAccent">#FFFFFF</color>
     <color name="colorAccentDark">#D1CDCD</color>
     <color name="colorBlack">#000000</color>
+    <color name="colorGreen">#89D17D</color>
     <color name="colorGray">#837E7E</color>
+    <color name="colorBlueWish">#6BB0C5</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
