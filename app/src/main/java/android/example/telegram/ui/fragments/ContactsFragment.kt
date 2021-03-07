@@ -2,6 +2,7 @@ package android.example.telegram.ui.fragments
 
 import android.example.telegram.R
 import android.example.telegram.models.CommonModel
+import android.example.telegram.ui.fragments.single_chat.SingleChatFragment
 import android.example.telegram.utilits.*
 import android.view.LayoutInflater
 import android.view.ViewGroup

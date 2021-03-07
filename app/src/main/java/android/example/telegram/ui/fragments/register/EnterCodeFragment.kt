@@ -1,6 +1,8 @@
 package android.example.telegram.ui.fragments.register
 
+import android.example.telegram.MainActivity
 import android.example.telegram.R
+import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.utilits.*
 import androidx.fragment.app.Fragment
 import com.google.firebase.auth.PhoneAuthProvider
@@ -38,7 +40,7 @@ class EnterCodeFragment(val phoneNumber: String, val id: String) :
                         REF_DATABASE_ROOT.child(NODE_USERS).child(uid).updateChildren(dateMap)
                             .addOnSuccessListener {
                                 showToast("Добро пожаловать")
-                                restartActivity()
+                                (activity as RegisterActivity).replaceActivity(MainActivity())
                             }
                             .addOnFailureListener { showToast(it.message.toString())}
                     }
