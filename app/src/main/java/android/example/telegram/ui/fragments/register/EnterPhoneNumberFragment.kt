@@ -1,5 +1,6 @@
 package android.example.telegram.ui.fragments.register
 
+import android.example.telegram.MainActivity
 import android.example.telegram.R
 import android.example.telegram.utilits.*
 import androidx.fragment.app.Fragment

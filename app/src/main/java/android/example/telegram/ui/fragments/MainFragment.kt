@@ -5,10 +5,11 @@ import android.example.telegram.databinding.FragmentChatsBinding
 import android.example.telegram.utilits.APP_ACTIVITY
 import androidx.fragment.app.Fragment
 
-class ChatsFragment : Fragment(R.layout.fragment_chats) {
+class MainFragment : Fragment(R.layout.fragment_chats) {
 
     override fun onResume() {
         super.onResume()
-        APP_ACTIVITY.title = "Чаты"
+        APP_ACTIVITY.title = "Telegram"
+        APP_ACTIVITY.mAppDrawer.enableDrawer()
     }
 }

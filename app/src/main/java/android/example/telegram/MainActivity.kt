@@ -1,9 +1,9 @@
 package android.example.telegram
 
 import android.content.pm.PackageManager
-import android.example.telegram.activities.RegisterActivity
 import android.example.telegram.databinding.ActivityMainBinding
-import android.example.telegram.ui.fragments.ChatsFragment
+import android.example.telegram.ui.fragments.MainFragment
+import android.example.telegram.ui.fragments.register.EnterPhoneNumberFragment
 import android.example.telegram.ui.objects.AppDrawer
 import android.example.telegram.utilits.*
 import android.os.Bundle
@@ -39,12 +39,12 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun initFunc() {
+        setSupportActionBar(mToolbar)
         if (AUTH.currentUser != null) {
-            setSupportActionBar(mToolbar)
             mAppDrawer.create()
-            replaceFragment(ChatsFragment(), false)
+            replaceFragment(MainFragment(), false)
         } else {
-            replaceActivity(RegisterActivity())
+            replaceFragment(EnterPhoneNumberFragment(), false)
         }
     }
 
