@@ -3,6 +3,7 @@ package android.example.telegram.ui.fragments
 import android.example.telegram.R
 import android.example.telegram.databinding.FragmentChatsBinding
 import android.example.telegram.utilits.APP_ACTIVITY
+import android.example.telegram.utilits.hideKeyboard
 import androidx.fragment.app.Fragment
 
 class MainFragment : Fragment(R.layout.fragment_chats) {
@@ -11,5 +12,6 @@ class MainFragment : Fragment(R.layout.fragment_chats) {
         super.onResume()
         APP_ACTIVITY.title = "Telegram"
         APP_ACTIVITY.mAppDrawer.enableDrawer()
+        hideKeyboard()
     }
 }
